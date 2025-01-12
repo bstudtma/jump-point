@@ -1,6 +1,6 @@
 # JumpPoint
 
-JumpPoint is a Windows application that allows users to quickly access their shortcuts using a system tray icon and a global hotkey (ALT + SPACE). The application hides itself when it loses focus and does not appear in the taskbar.
+JumpPoint is a Windows application that allows users to quickly access their shortcuts using a global hotkey (ALT + SPACE).
 
 ## Features
 
