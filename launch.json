@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": ".NET Launch (JumpPoint)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        // The relative path to the built DLL:
+        "program": "${workspaceFolder}/bin/Debug/net7.0-windows/JumpPoint.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "stopAtEntry": false,
+        "console": "integratedTerminal"
+      }
+    ]
+  }
+  

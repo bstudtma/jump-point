@@ -1,0 +1,37 @@
+<Window x:Class="JumpPoint.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="JumpPoint" Height="200" Width="400"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
+        Closed="Window_Closed">
+
+        <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- TextBox for user to type the shortcut name -->
+        <TextBox x:Name="SearchTextBox"
+                 Margin="0,0,0,10"
+                 FontSize="16"
+                 VerticalAlignment="Top"
+                 KeyDown="SearchTextBox_KeyDown"
+                 PreviewKeyDown="SearchTextBox_PreviewKeyDown"
+                 TextChanged="SearchTextBox_TextChanged" />
+
+        <!-- ListBox to display matching shortcuts -->
+        <ListBox x:Name="ShortcutsListBox"
+                 SelectionChanged="ShortcutsListBox_SelectionChanged"
+                 Grid.Row="1"
+                 MouseDoubleClick="ShortcutsListBox_MouseDoubleClick"
+                 MouseLeftButtonUp="ShortcutsListBox_MouseLeftButtonUp"
+                 PreviewKeyDown="ShortcutsListBox_PreviewKeyDown"
+                 GotFocus="ShortcutsListBox_GotFocus"
+                 FontSize="16"/>
+    </Grid>
+</Window>

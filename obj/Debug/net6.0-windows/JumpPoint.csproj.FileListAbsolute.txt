@@ -1,0 +1,2 @@
+D:\code\JumpPoint\obj\Debug\net6.0-windows\App.g.cs
+D:\code\JumpPoint\obj\Debug\net6.0-windows\JumpPoint_MarkupCompile.cache
