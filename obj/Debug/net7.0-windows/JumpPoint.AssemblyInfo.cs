@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JumpPoint")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0572a8a7050809122638350d8c8f6d41c56926e")]
 [assembly: System.Reflection.AssemblyProductAttribute("JumpPoint")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JumpPoint")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
