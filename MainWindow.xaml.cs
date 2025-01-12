@@ -64,6 +64,14 @@ namespace JumpPoint
             // Display all shortcuts initially
             ShortcutsListBox.ItemsSource = _allShortcuts;
 
+            this.Deactivated += MainWindow_Deactivated;
+            this.ShowInTaskbar = false;
+
+        }
+
+        private void MainWindow_Deactivated(object sender, EventArgs e)
+        {
+            this.Hide();
         }
 
         protected override void OnContentRendered(EventArgs e)
