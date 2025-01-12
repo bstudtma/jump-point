@@ -195,6 +195,14 @@ namespace JumpPoint
                 e.Handled = true;
             }
 
+            if (e.Key == Key.F2)
+            {
+                string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "JumpPoint");
+                _allShortcuts = LoadShortcuts(appDataPath);
+                FilterShortcuts(SearchTextBox.Text);
+                e.Handled = true;
+            }
+
             if (e.Key == Key.Escape)
             {
                 Hide();

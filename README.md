@@ -49,6 +49,8 @@ Use the `ALT + F4` hotkey to close the application.
 
 Use `F1` to open the configuration directory.
 
+Press `F2` to reload the shortcuts from the directory.
+
 ## Requirements
 
 - .NET 7.0 or later installed on the target machine.
