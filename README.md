@@ -36,10 +36,8 @@ The `arguments` field allows you to pass command-line arguments to the executabl
    ```sh
    git clone https://github.com/bstudtma/jump-point.git
    cd jump-point
-
-dotnet build --configuration Release
-
-dotnet publish -c Release -r win-x64 /p:PublishSingleFile=true --self-contained false
+   dotnet build --configuration Release
+   dotnet publish -c Release -r win-x64 /p:PublishSingleFile=true --self-contained false
 
 ## Usage
 
