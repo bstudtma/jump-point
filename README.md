@@ -37,6 +37,7 @@ The `arguments` field allows you to pass command-line arguments to the executabl
    cd jump-point
    dotnet build --configuration Release
    dotnet publish -c Release -r win-x64 /p:PublishSingleFile=true --self-contained false
+   ```
 
 ## Usage
 
