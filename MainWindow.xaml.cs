@@ -404,7 +404,9 @@ namespace JumpPoint
 
             if (Directory.Exists(folderPath))
             {
-                var files = Directory.GetFiles(folderPath, "*.lnk", SearchOption.AllDirectories);
+                var files = Directory.GetFiles(folderPath, "*.*", SearchOption.AllDirectories)
+                                    .Where(file => file.EndsWith(".lnk", StringComparison.OrdinalIgnoreCase) || file.EndsWith(".url", StringComparison.OrdinalIgnoreCase))
+                                    .ToArray();
                 foreach (var file in files)
                 {
                     list.Add(new ShortcutItem
