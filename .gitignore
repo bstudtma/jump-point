@@ -12,7 +12,11 @@
 mono_crash.*
 
 # User-specific files (Visual Studio Code)
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
 
 # User-specific files (JetBrains Rider)
 .idea/

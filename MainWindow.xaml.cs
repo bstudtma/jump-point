@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Interop;
-using WinForms = System.Windows.Forms; // Alias Windows Forms to avoid conflicts
+//using WinForms = System.Windows.Forms; // Alias Windows Forms to avoid conflicts
 
 namespace JumpPoint
 {
@@ -18,7 +18,7 @@ namespace JumpPoint
         private List<ShortcutItem> _allShortcuts;
 
         // System Tray icon
-        private WinForms.NotifyIcon _notifyIcon;
+        //private WinForms.NotifyIcon _notifyIcon;
 
         // Hotkey (ALT + SPACE) constants
         private const int MOD_ALT = 0x1;
@@ -40,22 +40,22 @@ namespace JumpPoint
             
 
             // Initialize tray icon
-            _notifyIcon = new WinForms.NotifyIcon
-            {
-                Icon = System.Drawing.SystemIcons.Application,
-                Visible = false,
-                Text = "JumpPoint"
-            };
+            //_notifyIcon = new WinForms.NotifyIcon
+            // {
+            //     Icon = System.Drawing.SystemIcons.Application,
+            //     Visible = false,
+            //     Text = "JumpPoint"
+            // };
 
             // Create a context menu for the tray icon
-            var contextMenu = new WinForms.ContextMenuStrip();
-            contextMenu.Items.Add("Open JumpPoint", null, (s, e) => ShowWindow());
-            contextMenu.Items.Add("Exit", null, OnExitClick);
+            //var contextMenu = new WinForms.ContextMenuStrip();
+            //contextMenu.Items.Add("Open JumpPoint", null, (s, e) => ShowWindow());
+            //contextMenu.Items.Add("Exit", null, OnExitClick);
 
-            _notifyIcon.ContextMenuStrip = contextMenu;
+            //_notifyIcon.ContextMenuStrip = contextMenu;
 
             // Double-clicking tray icon also opens the window
-            _notifyIcon.DoubleClick += (s, e) => ShowWindow();
+            //_notifyIcon.DoubleClick += (s, e) => ShowWindow();
 
             // Index all shortcuts in C:\shortcuts
             string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "JumpPoint");
@@ -129,6 +129,13 @@ namespace JumpPoint
                 e.Handled = false; // Allow the backspace to be processed by the TextBox
             }
 
+            if (char.IsLetterOrDigit((char)KeyInterop.VirtualKeyFromKey(e.Key)))
+            {
+                SearchTextBox.Focus();
+                SearchTextBox.CaretIndex = SearchTextBox.Text.Length;
+                e.Handled = false; // Allow the key press to be processed by the TextBox
+            }
+
             if (e.Key == Key.Up)
             {
                 if (ShortcutsListBox.SelectedIndex == 0)
@@ -138,25 +145,6 @@ namespace JumpPoint
                 }
             }
 
-
-            // else if (e.Key == Key.Up)
-            // {
-            // int selectedIndex = ShortcutsListBox.SelectedIndex;
-            // if (selectedIndex > 0)
-            // {
-            //     ShortcutsListBox.SelectedIndex = selectedIndex - 1;
-            //     e.Handled = true;
-            // }
-            // }
-            // else if (e.Key == Key.Down)
-            // {
-            // int selectedIndex = ShortcutsListBox.SelectedIndex;
-            // if (selectedIndex < ShortcutsListBox.Items.Count - 1)
-            // {
-            //     ShortcutsListBox.SelectedIndex = selectedIndex + 1;
-            //     e.Handled = true;
-            // }
-            // }
             if (e.Key == Key.Tab)
             {
                 var selectedItem = ShortcutsListBox.SelectedItem as ShortcutItem;
@@ -237,17 +225,7 @@ namespace JumpPoint
                 if (ShortcutsListBox.Items.Count > 0)
                 {
                     ShortcutsListBox.SelectedIndex = 0;
-                    // ShortcutsListBox.ScrollIntoView(ShortcutsListBox.Items[0]);
-                    // // f((ListBoxItem)ShortcutsListBox.SelectedItem).Focus();
-                    // var container = ShortcutsListBox.ItemContainerGenerator.ContainerFromItem(ShortcutsListBox.Items[0]) as ListViewItem;
-                    
-                    // if (container != null)
-                    // {
-                    //     container.Focus();
-                    //     container.IsSelected=true;
-                    //     Keyboard.Focus(container);
-                    //     //e.Handled = true;
-                    // }                    
+                 
                     e.Handled = true;
 
                     FocusListBoxItem(ShortcutsListBox, ShortcutsListBox.SelectedIndex);
@@ -310,41 +288,9 @@ namespace JumpPoint
             }
         }
 
-        private void ShortcutsListBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            
-            // var container = ShortcutsListBox.ItemContainerGenerator.ContainerFromItem(ShortcutsListBox.Items[0]) as ListViewItem;
-            // if (container != null)
-            // {
-            //     container.Focus();
-            //     container.IsSelected=true;
-            //     Keyboard.Focus(container);
-            // }
-        }
-
-
-
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Hide to tray instead of truly closing
-            //e.Cancel = true;
-            //Hide();
-
-            //_notifyIcon.Visible = true;
-
-            // Unregister hotkeys
-            //UnregisterHotKey(new WindowInteropHelper(this).Handle, HOTKEY_ID);
-
-            // Dispose of the tray icon
-            //_notifyIcon.Dispose();
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            // Dispose the tray icon when the window is truly closed
-            _notifyIcon.Dispose();
-
-            // Unregister the hotkey
+            // Unregister the hotkey when the window is closing
             var helper = new WindowInteropHelper(this);
             UnregisterHotKey(helper.Handle, HOTKEY_ID);
         }
@@ -355,16 +301,9 @@ namespace JumpPoint
             Show();
             Activate();
             SearchTextBox.Focus();
+            SearchTextBox.CaretIndex = SearchTextBox.Text.Length;
         }
-
-        // "Exit" context menu item click handler
-        private void OnExitClick(object sender, EventArgs e)
-        {
-            // Close the application and clean up
-            _notifyIcon.Dispose();
-            Application.Current.Shutdown();
-        }
-
+        
         // Capture the HOTKEY message
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
@@ -386,6 +325,7 @@ namespace JumpPoint
                 }
             }
 
+            // Handle ALT to prevent the system menu from showing unexpectedly
             const int WM_SYSCOMMAND = 0x0112;
             const int SC_KEYMENU = 0xF100;
 
@@ -397,7 +337,7 @@ namespace JumpPoint
             return IntPtr.Zero;
         }
 
-        // Load shortcuts from a folder (only .lnk files)
+        // Load shortcuts from a folder
         private List<ShortcutItem> LoadShortcuts(string folderPath)
         {
             var list = new List<ShortcutItem>();
@@ -454,13 +394,11 @@ namespace JumpPoint
                 }
             }
 
-
-
             return list.OrderBy(s => s.DisplayName).ToList();
         }
 
         // Filter the list based on user input
-        private void SearchTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchText = SearchTextBox.Text.Split(new[] { " > " }, StringSplitOptions.None).FirstOrDefault();
             FilterShortcuts(searchText);
@@ -489,6 +427,7 @@ namespace JumpPoint
             if (e.Key == Key.Return)
             {
                 LaunchSelectedShortcut();
+                e.Handled = true;
             }
         }
 
@@ -532,8 +471,6 @@ namespace JumpPoint
                         UseShellExecute = true,
                         WorkingDirectory = System.IO.Path.GetDirectoryName(path)
                     });
-
-                    //Process.Start(path, arguments);
 
                     // Hide the window after launching
                     Hide();

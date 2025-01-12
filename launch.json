@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": ".NET Launch (JumpPoint)",
+        "name": "C#: JumpPoint",
         "type": "coreclr",
         "request": "launch",
         "preLaunchTask": "build",
