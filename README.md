@@ -10,7 +10,7 @@ JumpPoint is a Windows application that allows users to quickly access their sho
 
 ## How It Works
 
-1. **Open Shortcuts Directory**: Press `F1` to open the directory where shortcuts can be located. You can use `.lnk` shortcuts or `.ini` files.
+1. **Open Shortcuts Directory**: Press `F1` to open the directory where shortcuts can be located. You can use `.lnk` or `.url` shortcuts or `.ini` files.
 
 **INI File Structure**: The `.ini` file should have the following structure:
     ```ini
