@@ -32,7 +32,6 @@ The `arguments` field allows you to pass command-line arguments to the executabl
 
 ## Installation
 
-1. Clone the repository:
    ```sh
    git clone https://github.com/bstudtma/jump-point.git
    cd jump-point
