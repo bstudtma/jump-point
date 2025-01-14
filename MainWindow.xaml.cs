@@ -8,7 +8,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Interop;
-//using WinForms = System.Windows.Forms; // Alias Windows Forms to avoid conflicts
 
 namespace JumpPoint
 {
@@ -16,9 +15,6 @@ namespace JumpPoint
     {
         // We'll store all found shortcuts here
         private List<ShortcutItem> _allShortcuts;
-
-        // System Tray icon
-        //private WinForms.NotifyIcon _notifyIcon;
 
         // Hotkey (ALT + SPACE) constants
         private const int MOD_ALT = 0x1;
@@ -37,25 +33,6 @@ namespace JumpPoint
             InitializeComponent();
 
 
-            
-
-            // Initialize tray icon
-            //_notifyIcon = new WinForms.NotifyIcon
-            // {
-            //     Icon = System.Drawing.SystemIcons.Application,
-            //     Visible = false,
-            //     Text = "JumpPoint"
-            // };
-
-            // Create a context menu for the tray icon
-            //var contextMenu = new WinForms.ContextMenuStrip();
-            //contextMenu.Items.Add("Open JumpPoint", null, (s, e) => ShowWindow());
-            //contextMenu.Items.Add("Exit", null, OnExitClick);
-
-            //_notifyIcon.ContextMenuStrip = contextMenu;
-
-            // Double-clicking tray icon also opens the window
-            //_notifyIcon.DoubleClick += (s, e) => ShowWindow();
 
             // Index all shortcuts in C:\shortcuts
             string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "JumpPoint");
@@ -90,15 +67,7 @@ namespace JumpPoint
             }
         }
 
-        private void ShortcutsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // var selectedItem = ShortcutsListBox.SelectedItem as ShortcutItem;
-            // if (selectedItem != null)
-            // {
-            // SearchTextBox.Text = selectedItem.DisplayName;
-            // SearchTextBox.CaretIndex = SearchTextBox.Text.Length;
-            // }
-        }
+
 
         private void ShortcutsListBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
